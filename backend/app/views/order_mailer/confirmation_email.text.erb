@@ -1,0 +1,17 @@
+Order#confirmation_email
+
+<%= @greeting %>, find me in app/views/order_mailer/confirmation_email.text.erb
+
+Thank you for your order!
+
+Order #<%= @order.id %>
+Status: <%= @order.status.titleize %>
+
+Order Items:
+<% @order_items.each do |item| %>
+* <%= item.product_name %> - Quantity: <%= item.quantity %> - Unit Price: $<%= number_with_precision(item.unit_price, precision: 2) %> - Subtotal: $<%= number_with_precision(item.quantity * item.unit_price, precision: 2) %>
+<% end %>
+
+Total: $<%= number_with_precision(@order.total, precision: 2) %>
+
+If you have any questions about your order, please don't hesitate to contact us.
