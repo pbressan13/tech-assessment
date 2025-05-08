@@ -1,8 +1,127 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.4.2  
+  Exclude:
+    - ./db/**/*
+    - ./bin/*
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+    - config/**/*
+    - test/**/*
+    - config.ru
+    - app/mailers/*
+    - app/jobs/*
+  DefaultFormatter: progress
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+Layout/LineLength:
+  Exclude: &tests_and_migrations
+    - "db/migrate/*"
+    - "**/spec/*"
+    - "**/spec/**/*"
+    - "**/*_spec.rb"
+
+Lint/ConstantDefinitionInBlock:
+  Exclude: &tests
+    - "**/spec/*"
+    - "**/spec/**/*"
+    - "**/*_spec.rb"
+
+Lint/EmptyClass:
+  Exclude: *tests
+
+Lint/MissingSuper:
+  Exclude: *tests
+
+Naming/BlockForwarding:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/GuardClause:
+  Severity: info
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/RedundantInitialize:
+  Exclude: *tests
+
+# Metrics configuration based on `rubocop-shopify`. See
+# https://github.com/Shopify/ruby-style-guide/blob/main/rubocop.yml for more
+# information.
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CollectionLiteralLength:
+  Enabled: true
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+# Layout configuration based on `rubocop-shopify`. See
+# https://github.com/Shopify/ruby-style-guide/blob/main/rubocop.yml for more
+# information.
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/CaseIndentation:
+  EnforcedStyle: end
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+Layout/FirstArgumentIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+  AllowMultilineFinalElement: true
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: true
+  AllowMultilineFinalElement: true
+
+Layout/HashAlignment:
+  EnforcedLastArgumentHashStyle: ignore_implicit
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/SpaceBeforeBrackets:
+  Enabled: true
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+

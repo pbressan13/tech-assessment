@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   include AASM
 
   has_many :order_items, dependent: :destroy
   accepts_nested_attributes_for :order_items, allow_destroy: true
-  
+
   validates :customer_email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :status, presence: true
   validates :total, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
@@ -30,7 +32,7 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: [:pending, :processing], to: :cancelled
+      transitions from: %i[pending processing], to: :cancelled
     end
   end
 
