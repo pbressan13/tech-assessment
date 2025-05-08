@@ -8,4 +8,4 @@ FactoryBot.define do
 
     association :order
   end
-end 
+end

@@ -93,7 +93,7 @@ RSpec.describe Orders::OrderService do
       it 'returns error messages' do
         allow(order).to receive(:process_order!).and_return(false)
         allow(order).to receive_message_chain(:errors, :full_messages).and_return(['Error message'])
-        
+
         result = service.process_order
         expect(result[:success]).to be false
         expect(result[:errors]).to include('Error message')
@@ -132,7 +132,7 @@ RSpec.describe Orders::OrderService do
       it 'returns error messages' do
         allow(order).to receive(:complete!).and_return(false)
         allow(order).to receive_message_chain(:errors, :full_messages).and_return(['Error message'])
-        
+
         result = service.complete
         expect(result[:success]).to be false
         expect(result[:errors]).to include('Error message')
@@ -171,7 +171,7 @@ RSpec.describe Orders::OrderService do
       it 'returns error messages' do
         allow(order).to receive(:cancel!).and_return(false)
         allow(order).to receive_message_chain(:errors, :full_messages).and_return(['Error message'])
-        
+
         result = service.cancel
         expect(result[:success]).to be false
         expect(result[:errors]).to include('Error message')
@@ -209,4 +209,4 @@ RSpec.describe Orders::OrderService do
       expect(result[:errors]).to include('Test error')
     end
   end
-end 
+end

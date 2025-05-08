@@ -17,6 +17,9 @@ WORKDIR /app
 # Copy Gemfile and Gemfile.lock
 COPY Gemfile Gemfile.lock ./
 
+# Copy .env file if it exists
+COPY .env* ./
+
 # Install gems
 RUN bundle install
 
