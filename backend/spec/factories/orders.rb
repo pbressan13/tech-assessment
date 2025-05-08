@@ -14,4 +14,4 @@ FactoryBot.define do
       status { 'completed' }
     end
   end
-end 
+end

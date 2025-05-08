@@ -58,7 +58,7 @@ RSpec.describe Order, type: :model do
       order_item2 = build(:order_item, unit_price: 5.0, quantity: 3)
       order.order_items << order_item1
       order.order_items << order_item2
-      
+
       order.save
       expect(order.total).to eq(35.0) # (10.0 * 2) + (5.0 * 3)
     end
@@ -92,7 +92,7 @@ RSpec.describe Order, type: :model do
         create(:order_item, order: order, unit_price: 5.0, quantity: 3)
 
         order.reload
-        
+
         order.calculate_total
         expect(order.total).to eq(35.0)
       end
@@ -104,4 +104,4 @@ RSpec.describe Order, type: :model do
       end
     end
   end
-end 
+end

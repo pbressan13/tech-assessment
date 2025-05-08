@@ -32,7 +32,19 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+
+  # Configure email delivery method for development
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV.fetch('MAILGUN_API_KEY', ''),
+    domain: ENV.fetch('MAILGUN_DOMAIN', '')
+  }
+
+  # Add detailed logging for ActionMailer
+  config.action_mailer.logger = Logger.new(STDOUT)
+  config.action_mailer.logger.level = Logger::DEBUG
 
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.

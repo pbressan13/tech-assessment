@@ -55,9 +55,9 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
     end
 
     it 'creates a new order' do
-      expect {
+      expect do
         post :create, params: valid_params
-      }.to change(Order, :count).by(1)
+      end.to change(Order, :count).by(1)
     end
 
     it 'returns created status' do
@@ -66,9 +66,9 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
     end
 
     it 'creates order items' do
-      expect {
+      expect do
         post :create, params: valid_params
-      }.to change(OrderItem, :count).by(2)
+      end.to change(OrderItem, :count).by(2)
     end
 
     context 'with invalid params' do
@@ -77,9 +77,9 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
       end
 
       it 'does not create a new order' do
-        expect {
+        expect do
           post :create, params: invalid_params
-        }.not_to change(Order, :count)
+        end.not_to change(Order, :count)
       end
 
       it 'returns unprocessable entity status' do
@@ -162,4 +162,4 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
       end
     end
   end
-end 
+end
