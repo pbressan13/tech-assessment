@@ -3,7 +3,7 @@
 module Api
   module V1
     class OrdersController < ApplicationController
-      before_action :set_order, only: %i[show update process_order complete cancel]
+      before_action :set_order, only: %i[show process_order complete cancel]
 
       def index
         @orders = Order.includes(:order_items).order(created_at: :desc)
@@ -25,7 +25,7 @@ module Api
       end
 
       def process_order
-        result = Orders::OrderService.new(@order).process
+        result = Orders::OrderService.new(@order).process_order
 
         if result[:success]
           render json: result[:order]

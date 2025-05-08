@@ -24,10 +24,10 @@ module Orders
       { success: false, errors: [e.message] }
     end
 
-    def process
+    def process_order
       Order.transaction do
-        if @order.process!
-          broadcast_order_update(@order, 'order_processed')
+        if @order.process_order!
+          broadcast_order_update(@order, 'order_processing')
           { success: true, order: @order }
         else
           { success: false, errors: @order.errors.full_messages }

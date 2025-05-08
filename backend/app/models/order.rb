@@ -14,16 +14,13 @@ class Order < ApplicationRecord
   after_create :schedule_confirmation_email
   after_save :calculate_total
 
-  scope :active, -> { where(deleted_at: nil) }
-  scope :deleted, -> { where.not(deleted_at: nil) }
-
   aasm column: :status do
     state :pending, initial: true
     state :processing
     state :completed
     state :cancelled
 
-    event :process do
+    event :process_order do
       transitions from: :pending, to: :processing
     end
 
@@ -39,14 +36,6 @@ class Order < ApplicationRecord
   def calculate_total
     new_total = order_items.sum { |item| item.quantity * item.unit_price }
     update_column(:total, new_total) if total != new_total
-  end
-
-  def invalidate!
-    update_column(:deleted_at, Time.current)
-  end
-
-  def invalidated?
-    deleted_at.present?
   end
 
   private
