@@ -1,6 +1,7 @@
 import { createConsumer } from "@rails/actioncable";
 
-const consumer = createConsumer("ws://localhost:3000/cable");
+const WS_URL = import.meta.env.VITE_WS_URL || "ws://localhost:3000/cable";
+const consumer = createConsumer(WS_URL);
 
 export const subscribeToOrders = (callback) => {
   const subscription = consumer.subscriptions.create("OrdersChannel", {

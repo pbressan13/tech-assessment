@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/v1";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -10,10 +10,11 @@ const api = axios.create({
   withCredentials: true,
 });
 
-export const getOrders = () => api.get("/orders");
-export const getOrder = (id) => api.get(`/orders/${id}`);
-export const createOrder = (data) => api.post("/orders", data);
-export const updateOrder = (id, data) => api.put(`/orders/${id}`, data);
-export const processOrder = (id) => api.post(`/orders/${id}/process_order`);
-export const completeOrder = (id) => api.post(`/orders/${id}/complete`);
-export const cancelOrder = (id) => api.post(`/orders/${id}/cancel`);
+export const getOrders = () => api.get("/api/v1/orders");
+export const getOrder = (id) => api.get(`/api/v1/orders/${id}`);
+export const createOrder = (data) => api.post("/api/v1/orders", data);
+export const updateOrder = (id, data) => api.put(`/api/v1/orders/${id}`, data);
+export const processOrder = (id) =>
+  api.post(`/api/v1/orders/${id}/process_order`);
+export const completeOrder = (id) => api.post(`/api/v1/orders/${id}/complete`);
+export const cancelOrder = (id) => api.post(`/api/v1/orders/${id}/cancel`);
