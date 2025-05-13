@@ -1,21 +1,39 @@
-# Aceup Tech Assessment 
+# AceUp Tech Assessment
 
 This repository contains two projects:
 - **frontend/**: React 19 + Vite application
 - **backend/**: Ruby on Rails 7.2 API-only application (Ruby 3.2)
 
-All services run in Docker using `docker-compose`.
+## Tech Stack
+
+### Backend
+- Ruby on Rails 7.2
+- PostgreSQL
+- Redis
+- Sidekiq for background jobs
+- Mailgun for email delivery
+- RSpec for testing
+
+### Frontend
+- React
+- Material-UI
+- Vite
 
 ## Prerequisites
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/)
 
-## Quick Start
+- Docker and Docker Compose
+- Ruby 3.2.2
+- Node.js 18+
+- Mailgun account
 
-1. **Build and start all services:**
+## Setup
 
+1. Clone the repository:
 ```bash
-make build
+git clone <repository-url>
+cd tech-assessment
 ```
 
 2. **Access the apps:**
@@ -32,6 +50,7 @@ make build
 
 4. **First-time Rails setup** (run in another terminal):
 
+3. Start the application:
 ```bash
 make db.init
 ```
@@ -63,14 +82,48 @@ make db.init
   make sh
   ```
 
-- **Run migrations:**
-  ```bash
-  make db.migrate
-  ```
+### Mailgun Setup
 
-## Exercise
+1. Sign up for a Mailgun account at https://www.mailgun.com/
+2. Verify your domain or use the sandbox domain
+3. Get your API key from the Mailgun dashboard
+4. Update the `.env` file with your Mailgun credentials
 
-Following the MVCS pattern (Model, View, Controller, Service), create a very simple order management system.
+# Mailgun Configuration
+```
+MAILGUN_API_KEY=your-mailgun-api-key
+MAILGUN_DOMAIN=your-mailgun-domain
+MAILGUN_FROM_EMAIL=noreply@your-mailgun-domain
+```
+
+Note: If using the sandbox domain, you'll need to authorize recipient email addresses in the Mailgun dashboard.
+
+## Features
+
+- Create and manage orders
+- Real-time order status updates
+- Email notifications for order status changes
+- Background job processing
+- Responsive Material-UI interface
+
+## Project Structure
+
+```
+.
+├── backend/               # Rails API
+│   ├── app/
+│   │   ├── controllers/   # API controllers
+│   │   ├── models/       # Database models
+│   │   ├── mailers/      # Email templates
+│   │   └── services/     # Business logic
+│   └── spec/             # RSpec tests
+│
+└── frontend/             # React application
+    ├── src/
+    │   ├── components/   # React components
+    │   └── services/     # API services
+    └── public/           # Static assets
+```
 
 **Frontend**
 
