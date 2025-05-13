@@ -10,7 +10,7 @@ This repository contains two projects:
 - Ruby on Rails 7.2
 - PostgreSQL
 - Redis
-- Sidekiq for background jobs
+- ActiveJob for background jobs
 - Mailgun for email delivery
 - RSpec for testing
 
@@ -110,16 +110,23 @@ Note: If using the sandbox domain, you'll need to authorize recipient email addr
 .
 ├── backend/               # Rails API
 │   ├── app/
-│   │   ├── controllers/   # API controllers
+│   │   ├── controllers/   
+│   │   │   └── api/
+│   │   │       └── v1/    # Versioned API controllers
 │   │   ├── models/       # Database models
 │   │   ├── mailers/      # Email templates
-│   │   └── services/     # Business logic
+│   │   ├── services/     # Business logic
+│   │   ├── serializers/  # JSON serializers
+│   │   └── channels/     # ActionCable channels
 │   └── spec/             # RSpec tests
 │
 └── frontend/             # React application
     ├── src/
     │   ├── components/   # React components
-    │   └── services/     # API services
+    │   ├── services/     # API services
+    │   │   ├── api.js    # REST API client
+    │   │   └── actionCable.js  # WebSocket client
+    │   └── controllers/  # Business logic controllers
     └── public/           # Static assets
 ```
 
