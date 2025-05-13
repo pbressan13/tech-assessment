@@ -22,8 +22,6 @@ This repository contains two projects:
 ## Prerequisites
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/)
-
-- Docker and Docker Compose
 - Ruby 3.2.2
 - Node.js 18+
 - Mailgun account
@@ -100,10 +98,10 @@ Note: If using the sandbox domain, you'll need to authorize recipient email addr
 
 ## Features
 
-- Create and manage orders
-- Real-time order status updates
-- Email notifications for order status changes
-- Background job processing
+- Create and manage orders using react states
+- Real-time order status updates using action cable
+- Email notifications for order status changes using mailgun
+- Background job processing using sidekiq
 - Responsive Material-UI interface
 
 ## Project Structure
@@ -128,8 +126,16 @@ Note: If using the sandbox domain, you'll need to authorize recipient email addr
 **Frontend**
 
 - Create a Dashboard with at least 1 stat (# of orders created)
+
+![image](https://github.com/user-attachments/assets/8120cbc2-8f1a-403b-8a8d-e582a60064b2)
+
 - Create an order table | New Order button | New Order dialog
+
+![image](https://github.com/user-attachments/assets/2f9354c3-2748-4b05-b885-b43757e09f9b)
+
 - Refresh orders after new is created
+
+![image](https://github.com/user-attachments/assets/c901ec11-f485-4e77-98c6-ed375cab8657)
 
 **Backend**
 
