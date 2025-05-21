@@ -9,9 +9,9 @@ class Order < ApplicationRecord
   validates :customer_email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :status, presence: true
   validates :total, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :order_type, presence: true
 
   before_validation :set_initial_status
-  after_create :schedule_confirmation_email
   after_save :calculate_total
 
   aasm column: :status do
@@ -42,9 +42,5 @@ class Order < ApplicationRecord
 
   def set_initial_status
     self.status ||= :pending
-  end
-
-  def schedule_confirmation_email
-    OrderMailer.confirmation_email(self).deliver_later
   end
 end

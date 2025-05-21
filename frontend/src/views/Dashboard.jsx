@@ -15,6 +15,7 @@ import OrdersTable from "../components/OrdersTable";
 import NewOrderDialog from "../components/NewOrderDialog";
 import Notice from "../components/Notice";
 import OrdersController from "../controllers/OrdersController";
+import { subscribeToOrders } from "../services/actionCable";
 
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
@@ -39,8 +40,22 @@ const Dashboard = () => {
       });
     });
 
+    // Subscribe to Action Cable updates
+    const unsubscribe = subscribeToOrders((data) => {
+      if (data.type === "order_created") {
+        OrdersController.fetchOrders();
+      } else if (
+        data.type === "order_processing" ||
+        data.type === "order_completed" ||
+        data.type === "order_cancelled"
+      ) {
+        OrdersController.fetchOrders();
+      }
+    });
+
     return () => {
       OrdersController.removeListener(handleOrdersChange);
+      unsubscribe();
     };
   }, []);
 
