@@ -8,10 +8,18 @@ module Orders
       @params = params
     end
 
+    def self.for(order_type = 'transfer')
+      # if order_type is not provided, use "transfer" as default
+      order_type = 'transfer' if order_type.blank?
+      service_class_name = "Orders::#{order_type.capitalize}OrderService"
+      service_class_name.constantize
+    rescue StandardError
+      raise 'Unkown order type'
+    end
+
     def create
       Order.transaction do
         order = Order.new(@params)
-
         if order.save
           broadcast_order_update(order, 'order_created')
           { success: true, order: order }
